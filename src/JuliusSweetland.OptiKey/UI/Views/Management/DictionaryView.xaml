@@ -23,15 +23,18 @@
             <Label Content="{x:Static resx:Resources.ADD_NEW_ENTRY_TO_DICTIONARY}" 
                    FontWeight="Bold"
                    Margin="2" 
-                   VerticalAlignment="Center" />
+                   VerticalAlignment="Center"
+                   Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
             <TextBox MinWidth="150" 
                      Text="{Binding NewEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                      Margin="2" 
-                     VerticalAlignment="Center" />
+                     VerticalAlignment="Center"
+                     Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
             <Button Content="{x:Static resx:Resources.ADD_DICTIONARY_ENTRY}" 
                     Command="{Binding AddCommand}" 
                     Margin="2" 
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
         </StackPanel>
         
         <ItemsControl Grid.Row="1"
@@ -50,7 +53,8 @@
                                    Text="{Binding Entry}"
                                    HorizontalAlignment="Left" 
                                    VerticalAlignment="Center" 
-                                   Margin="50,2,50,2">
+                                   Margin="50,2,50,2"
+                                   Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
                                     <Style.Triggers>
@@ -71,7 +75,8 @@
                                 MinWidth="100" 
                                 Margin="50,2,50,2"
                                 Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.ToggleDeleteCommand}" 
-                                CommandParameter="{Binding Entry}">
+                                CommandParameter="{Binding Entry}"
+                                Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                                     <Setter Property="Content" Value="{x:Static resx:Resources.DELETE_DICTIONARY_ENTRY}" />
@@ -105,5 +110,19 @@
                 </ControlTemplate>
             </ItemsControl.Template>
         </ItemsControl>
+
+        <TextBlock Grid.RowSpan="2" Text="{x:Static resx:Resources.DICTIONARY_CONTROLS_UNAVAILABLE}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="Visibility" Value="{Binding DictionaryControlsUnavailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DictionaryIsPresage}" Value="True">
+                            <Setter Property="Text" Value="{x:Static resx:Resources.DICTIONARY_IS_PRESAGE}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </Grid>
 </UserControl>

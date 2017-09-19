@@ -1917,4 +1917,13 @@ The prediction method will be changed to NGram to prevent a crash on next run.</
   <data name="TOBII_PCEYE_GO_PLUS" xml:space="preserve">
     <value>Tobii PCEye Plus</value>
   </data>
+  <data name="DICTIONARY_CONTROLS_UNAVAILABLE" xml:space="preserve">
+    <value>The suggestion method currently in use has no dictionary controls</value>
+  </data>
+  <data name="DICTIONARY_IS_PRESAGE" xml:space="preserve">
+    <value>The Presage dictionary cannot be edited from here.
+It's default location is "C:\Program Files (x86)\presage\share\presage\database_en.db".
+It can be edited with a program which can read SQLite format 3 files 
+such as "DB Browser for SQLite" (which is a free program).</value>
+  </data>
 </root>

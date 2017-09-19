@@ -1010,11 +1010,32 @@ namespace JuliusSweetland.OptiKey.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The suggestion method currently in use has no dictionary controls.
+        /// </summary>
+        public static string DICTIONARY_CONTROLS_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("DICTIONARY_CONTROLS_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No user dictionary exists and original dictionary could not be found at path: &apos;{0}&apos;.
         /// </summary>
         public static string DICTIONARY_FILE_NOT_FOUND_ERROR {
             get {
                 return ResourceManager.GetString("DICTIONARY_FILE_NOT_FOUND_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Presage dictionary cannot be edited from here.
+        ///It&apos;s default location is &quot;C:\Program Files (x86)\presage\share\presage\database_en.db&quot;.
+        ///It can be edited with a program which can read SQLite format 3 files 
+        ///such as &quot;DB Browser for SQLite&quot; (which is a free program)..
+        /// </summary>
+        public static string DICTIONARY_IS_PRESAGE {
+            get {
+                return ResourceManager.GetString("DICTIONARY_IS_PRESAGE", resourceCulture);
             }
         }
         
