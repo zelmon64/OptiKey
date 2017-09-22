@@ -9,9 +9,10 @@
     
     <UserControl.Resources>
         <CollectionViewSource x:Key="EntriesCollectionViewSource" Source="{Binding Entries}" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    
-    <Grid IsSharedSizeScope="True">
+
+    <Grid IsSharedSizeScope="True" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -19,7 +20,8 @@
         
         <StackPanel Grid.Row="0" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                   Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" >
             <Label Content="{x:Static resx:Resources.ADD_NEW_ENTRY_TO_DICTIONARY}" 
                    FontWeight="Bold"
                    Margin="2" 
@@ -40,10 +42,12 @@
         <ItemsControl Grid.Row="1"
                       VirtualizingStackPanel.IsVirtualizing="True"
                       ScrollViewer.CanContentScroll="True"
-                      ItemsSource="{Binding Source={StaticResource EntriesCollectionViewSource}, Mode=OneWay}">
+                      ItemsSource="{Binding Source={StaticResource EntriesCollectionViewSource}, Mode=OneWay}"
+                   Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid
+                   Visibility="{Binding DictionaryControlsAvailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" SharedSizeGroup="ToggleDeleteButtonColumn" />
@@ -111,18 +115,22 @@
             </ItemsControl.Template>
         </ItemsControl>
 
-        <TextBlock Grid.RowSpan="2" Text="{x:Static resx:Resources.DICTIONARY_CONTROLS_UNAVAILABLE}"
-                   VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" >
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
-                    <Setter Property="Visibility" Value="{Binding DictionaryControlsUnavailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding DictionaryIsPresage}" Value="True">
-                            <Setter Property="Text" Value="{x:Static resx:Resources.DICTIONARY_IS_PRESAGE}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
+        <Grid Grid.RowSpan="2" Background="Transparent">
+            <Viewbox Stretch="Uniform">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" >
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                            <Setter Property="Text" Value="{x:Static resx:Resources.DICTIONARY_CONTROLS_UNAVAILABLE}" />
+                            <Setter Property="Visibility" Value="{Binding DictionaryControlsUnavailable, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding DictionaryIsPresage}" Value="True">
+                                    <Setter Property="Text" Value="{x:Static resx:Resources.DICTIONARY_IS_PRESAGE}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Viewbox>
+        </Grid>
     </Grid>
 </UserControl>

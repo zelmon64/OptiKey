@@ -12,31 +12,5 @@ namespace JuliusSweetland.OptiKey.UI.Views.Management
         {
             InitializeComponent();
         }
-
-        public bool DictionaryControlsAvailable
-        {
-            get
-            {
-                return Settings.Default.SuggestionMethod == Enums.SuggestionMethods.NGram
-                    || Settings.Default.SuggestionMethod == Enums.SuggestionMethods.Basic;
-            }
-        }
-
-        public bool DictionaryControlsUnavailable
-        {
-            get
-            {
-                return Settings.Default.SuggestionMethod != Enums.SuggestionMethods.NGram
-                    && Settings.Default.SuggestionMethod != Enums.SuggestionMethods.Basic;
-            }
-        }
-
-        public bool DictionaryIsPresage
-        {
-            get
-            {
-                return Settings.Default.SuggestionMethod == Enums.SuggestionMethods.Presage;
-            }
-        }
     }
 }
